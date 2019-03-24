@@ -1,7 +1,7 @@
 PWD=$(shell pwd)
 NAME=$(shell basename $(PWD))
 IMAGE=gcc8
-TAG=$(shell git rev-parse --short HEAD)
+TAG=local
 
 .PHONY: docker-build docker-run docker-exec docker-commit
 
