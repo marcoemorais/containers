@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
     strace \
     sysstat \
     tcpdump \
-    tree
+    tree \
+    valgrind
 
 # Installation prefix for third party libraries.
 ARG PREFIX_DIRECTORY=/usr/local
