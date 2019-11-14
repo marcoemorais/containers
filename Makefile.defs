@@ -1,8 +1,3 @@
-PWD=$(shell pwd)
-NAME=$(shell basename $(PWD))
-IMAGE=clang38
-TAG=local
-
 .PHONY: docker-build docker-run docker-exec docker-commit
 
 docker-build:
