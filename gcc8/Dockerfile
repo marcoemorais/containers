@@ -14,18 +14,21 @@ RUN apt-get update && apt-get install -y \
     less \
     make \
     man \
-    manpages-dev \
     strace \
     sysstat \
     tcpdump \
     tree \
     valgrind
 
+# Setup symlinks to toolchain through ccache.
+RUN /usr/sbin/update-ccache-symlinks
+
+# Use the gcc toolchain by setting CC and CXX environment variables.
+ENV CC=/usr/bin/gcc-8
+ENV CXX=/usr/bin/g++-8
+
 # Installation prefix for third party libraries.
 ARG PREFIX_DIRECTORY=/usr/local
-
-# Build and run tests for source based dependencies.
-ARG BUILD_TESTING=ON
 
 # Unit test.
 ARG CATCH_TAG=v2.10.0
@@ -35,9 +38,6 @@ RUN git clone -q https://github.com/catchorg/Catch2.git /catch-${CATCH_TAG} --br
     && cmake \
         -DCMAKE_BUILD_TYPE=RELEASE \
         -DCMAKE_INSTALL_PREFIX=${PREFIX_DIRECTORY} \
-        -DCATCH_BUILD_TESTING=${BUILD_TESTING} \
-        -DCATCH_BUILD_EXAMPLES=OFF \
-        -DCATCH_BUILD_EXTRA_TESTS=OFF \
         .. \
     && make install \
     && rm -rf /catch-${CATCH_TAG}
