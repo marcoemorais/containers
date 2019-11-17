@@ -2,8 +2,11 @@ FROM ubuntu:18.04
 
 LABEL maintainer="Marco Morais <marcoemorais@yahoo.com>"
 
+# Comment out systemwide manpage exclusion.
+RUN sed -i '/path-exclude=\/usr\/share\/man\/*/c\#path-exclude=\/usr\/share\/man\/*' /etc/dpkg/dpkg.cfg.d/excludes
+
 # Base system including toolchain and dependencies.
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     ccache \
     clang \
     cmake \
@@ -11,9 +14,12 @@ RUN apt-get update && apt-get install -y \
     git \
     htop \
     less \
+    libstdc++-6-dev \
+    libstdc++-6-doc \
     lldb \
     make \
     man \
+    manpages-dev \
     strace \
     sysstat \
     tcpdump \
