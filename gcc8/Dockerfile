@@ -4,7 +4,7 @@ FROM gcc:8.3
 LABEL maintainer="Marco Morais <marcoemorais@yahoo.com>"
 
 # Base system including toolchain and dependencies.
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     ccache \
     cmake \
     ctags \
@@ -12,8 +12,10 @@ RUN apt-get update && apt-get install -y \
     git \
     htop \
     less \
+    libstdc++-8-doc \
     make \
     man \
+    manpages-dev \
     strace \
     sysstat \
     tcpdump \
