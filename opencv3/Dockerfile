@@ -27,6 +27,7 @@ RUN apt-get install -y \
     libavcodec-dev \
     libavformat-dev \
     libswscale-dev \
+    libavresample-dev \
     libv4l-dev \
     libxvidcore-dev \
     libx264-dev
