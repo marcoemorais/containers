@@ -22,6 +22,15 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     tree \
     valgrind
 
+# For numerical linear algebra.
+RUN apt-get install -y \
+    libopenblas-dev \
+    liblapacke-dev \
+    libeigen3-dev
+
+# OpenBLAS doesn't provide a lapacke.h header.
+RUN ln -s /usr/include/lapacke.h /usr/include/x86_64-linux-gnu
+
 # For OpenCV video support.
 RUN apt-get install -y \
     libavcodec-dev \
@@ -39,7 +48,8 @@ RUN apt-get install -y \
 # For OpenCV with python3 bindings.
 RUN apt-get install -y \
     python3-dev \
-    python3-numpy
+    python3-numpy \
+    python3-matplotlib
 
 # Setup symlinks to toolchain through ccache.
 RUN /usr/sbin/update-ccache-symlinks
@@ -52,7 +62,7 @@ ENV CXX=/usr/bin/g++-8
 ARG PREFIX_DIRECTORY=/usr/local
 
 # OpenCV.
-ARG OPENCV_VERSION=3.4.8
+ARG OPENCV_VERSION=3.4.9
 RUN wget --quiet https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip --output-document /opencv-${OPENCV_VERSION}.zip \
     && unzip /opencv-${OPENCV_VERSION}.zip \
     && mkdir -p /opencv-${OPENCV_VERSION}/.build \
@@ -60,6 +70,8 @@ RUN wget --quiet https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip 
     && cmake \
         -DCMAKE_BUILD_TYPE=RELEASE \
         -DCMAKE_INSTALL_PREFIX=${PREFIX_DIRECTORY} \
+        -DOpen_BLAS_INCLUDE_SEARCH_PATHS=/usr/include/x86_64-linux-gnu \
+        -DOpen_BLAS_LIB_SEARCH_PATHS=/usr/lib/x86_64-linux-gnu \
         .. \
     && make install \
     && rm -rf /opencv-${OPENCV_VERSION} /opencv-${OPENCV_VERSION}.zip
@@ -72,9 +84,6 @@ RUN git clone -q https://github.com/catchorg/Catch2.git /catch-${CATCH_TAG} --br
     && cmake \
         -DCMAKE_BUILD_TYPE=RELEASE \
         -DCMAKE_INSTALL_PREFIX=${PREFIX_DIRECTORY} \
-        -DCATCH_BUILD_TESTING=${BUILD_TESTING} \
-        -DCATCH_BUILD_EXAMPLES=OFF \
-        -DCATCH_BUILD_EXTRA_TESTS=OFF \
         .. \
     && make install \
     && rm -rf /catch-${CATCH_TAG}
