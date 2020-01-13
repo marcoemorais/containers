@@ -6,7 +6,8 @@ DIRS := \
 	eigen \
 	gcc8 \
 	golang \
-	opencv3
+	opencv3 \
+	opencv4
 
 .PHONY: all $(DIRS)
 
