@@ -48,8 +48,10 @@ RUN apt-get install -y \
 # For OpenCV with python3 bindings.
 RUN apt-get install -y \
     python3-dev \
-    python3-numpy \
-    python3-matplotlib
+    python3-pip
+
+# Install numpy and some additional packages which are useful, but not required.
+RUN pip3 install "numpy<1.18" "matplotlib<3.2" "jupyter<1.1"
 
 # Setup symlinks to toolchain through ccache.
 RUN /usr/sbin/update-ccache-symlinks
