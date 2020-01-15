@@ -4,6 +4,7 @@ DIRS := \
 	clang6 \
 	clang8 \
 	eigen \
+	flask \
 	gcc8 \
 	golang \
 	opencv3 \
