@@ -5,7 +5,9 @@ LABEL maintainer="Marco Morais <marcoemorais@yahoo.com>"
 # Base system including toolchain and dependencies.
 RUN apk --no-cache --upgrade add \
     ca-certificates \
-    python3
+    python3 \
+    uwsgi \
+    uwsgi-python
 
 # Copy requirements file into container image.
 COPY requirements.txt /
