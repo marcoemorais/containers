@@ -1,4 +1,4 @@
-.PHONY: docker-build docker-run docker-exec docker-commit
+.PHONY: docker-build docker-run docker-exec
 
 docker-build:
 	docker build -t $(IMAGE):$(TAG) -f Dockerfile .
@@ -8,7 +8,4 @@ docker-run:
 
 docker-exec:
 	docker exec -it $(NAME) /bin/bash
-
-docker-commit:
-	docker commit $(shell docker ps --quiet) $(IMAGE):$(TAG)
 
