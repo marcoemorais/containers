@@ -1,5 +1,5 @@
 # Official golang container.
-FROM golang:1.13
+FROM golang:1.14
 
 LABEL maintainer="Marco Morais <marcoemorais@yahoo.com>"
 
