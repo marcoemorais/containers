@@ -1,0 +1,2 @@
+jupyter~=1.0
+markdown~=3.2
