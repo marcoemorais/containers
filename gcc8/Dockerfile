@@ -12,7 +12,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     git \
     htop \
     less \
-    libstdc++-8-doc \
     make \
     man \
     manpages-dev \
@@ -26,14 +25,14 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 RUN /usr/sbin/update-ccache-symlinks
 
 # Use the gcc toolchain by setting CC and CXX environment variables.
-ENV CC=/usr/bin/gcc-8
-ENV CXX=/usr/bin/g++-8
+ENV CC=/usr/local/bin/gcc
+ENV CXX=/usr/local/bin/g++
 
 # Installation prefix for third party libraries.
 ARG PREFIX_DIRECTORY=/usr/local
 
 # Unit test.
-ARG CATCH_TAG=v2.10.0
+ARG CATCH_TAG=v2.13.3
 RUN git clone -q https://github.com/catchorg/Catch2.git /catch-${CATCH_TAG} --branch ${CATCH_TAG} \
     && mkdir -p /catch-${CATCH_TAG}/.build \
     && cd /catch-${CATCH_TAG}/.build \

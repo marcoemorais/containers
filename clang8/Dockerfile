@@ -14,7 +14,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     htop \
     less \
     libstdc++-8-dev \
-    libstdc++-8-doc \
     lldb \
     make \
     man \
@@ -33,7 +32,7 @@ ENV CXX=/usr/bin/clang++-8
 ARG PREFIX_DIRECTORY=/usr/local
 
 # Unit test.
-ARG CATCH_TAG=v2.10.0
+ARG CATCH_TAG=v2.13.3
 RUN git clone -q https://github.com/catchorg/Catch2.git /catch-${CATCH_TAG} --branch ${CATCH_TAG} \
     && mkdir -p /catch-${CATCH_TAG}/.build \
     && cd /catch-${CATCH_TAG}/.build \
