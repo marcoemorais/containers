@@ -4,7 +4,7 @@ docker-build:
 	docker build -t $(IMAGE):$(TAG) -f Dockerfile .
 
 docker-run:
-	docker run --name $(NAME) --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --rm -it -v $(PWD):/src $(IMAGE):$(TAG)
+	docker run --name $(NAME) --rm -it -v $(PWD):/src $(IMAGE):$(TAG)
 
 docker-exec:
 	docker exec -it $(NAME) /bin/bash
