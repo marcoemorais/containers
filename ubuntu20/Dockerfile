@@ -20,9 +20,6 @@ RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt
 RUN yes | unminimize \
     && apt-get install -y man-db
 
-# Cleanup package cache.
-RUN rm -r /var/lib/apt/lists/*
-
 # Use the clang toolchain by setting CC and CXX environment variables.
 ENV CC=/usr/bin/gcc
 ENV CXX=/usr/bin/g++
