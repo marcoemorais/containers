@@ -16,9 +16,6 @@ RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt
 RUN yes | unminimize \
     && apt-get install -y man-db
 
-# Cleanup package cache.
-RUN rm -r /var/lib/apt/lists/*
-
 # Install pathogen.
 RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
