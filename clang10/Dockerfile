@@ -2,11 +2,13 @@ FROM docker.io/library/ubuntu:18.04
 
 LABEL maintainer="Marco Morais <marcoemorais@yahoo.com>"
 
+ARG CLANG_VERSION=10
+
 # Base system including toolchain and dependencies.
 RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
-    clang-10 \
-    clang-tidy-10 \
-    clang-format-10 \
+    clang-${CLANG_VERSION} \
+    clang-tidy-${CLANG_VERSION} \
+    clang-format-${CLANG_VERSION} \
     cmake \
     git \
     less \
@@ -25,8 +27,8 @@ RUN yes | unminimize \
 RUN rm -r /var/lib/apt/lists/*
 
 # Use the clang toolchain by setting CC and CXX environment variables.
-ENV CC=/usr/bin/clang-10
-ENV CXX=/usr/bin/clang++-10
+ENV CC=/usr/bin/clang-${CLANG_VERSION}
+ENV CXX=/usr/bin/clang++-${CLANG_VERSION}
 
 # Installation prefix for third party libraries.
 ARG PREFIX_DIRECTORY=/usr/local
