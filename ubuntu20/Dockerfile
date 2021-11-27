@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt
 RUN yes | unminimize \
     && apt-get install -y man-db
 
-# Use the clang toolchain by setting CC and CXX environment variables.
+# Use the gcc toolchain by setting CC and CXX environment variables.
 ENV CC=/usr/bin/gcc
 ENV CXX=/usr/bin/g++
 
