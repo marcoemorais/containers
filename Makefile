@@ -1,14 +1,21 @@
 action?=docker-build
 
 DIRS := \
+	clang10 \
 	clang6 \
 	clang8 \
 	eigen \
 	flask \
+	gcc10 \
 	gcc8 \
 	golang \
-	opencv3 \
-	opencv4
+	jupyter-numerics \
+	jupyter-opencv4 \
+	jupyter-python3 \
+	latex \
+	opencv4 \
+	ubuntu20 \
+	vim
 
 .PHONY: all $(DIRS)
 
