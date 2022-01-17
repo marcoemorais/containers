@@ -16,6 +16,16 @@ RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt
     tree \
     valgrind
 
+# Install google developer tools: gflags, gtest, google-benchmark.
+RUN apt-get install -y \
+    libgflags-dev \
+    libgtest-dev \
+    libbenchmark-dev
+
+# Install catch.
+RUN apt-get install -y \
+    catch
+
 # Explode manpages.
 RUN yes | unminimize \
     && apt-get install -y man-db
@@ -40,7 +50,7 @@ RUN git clone -q https://github.com/onqtam/doctest.git /doctest-${DOCTEST_TAG} -
     && rm -rf /doctest-${DOCTEST_TAG}
 
 # C++ reference.
-ARG STDMAN_TAG=2020.11.17
+ARG STDMAN_TAG=2021.12.21
 RUN git clone -q https://github.com/jeaye/stdman.git /stdman-${STDMAN_TAG} --branch ${STDMAN_TAG} \
     && mkdir -p /stdman-${STDMAN_TAG} \
     && cd /stdman-${STDMAN_TAG} \
