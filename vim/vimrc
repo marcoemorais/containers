@@ -47,7 +47,7 @@ noremap <silent> NCC :set colorcolumn=""<CR>
 " -----------------------------------------------------------------------------
 " Set current working directory to same as current open file.
 " -----------------------------------------------------------------------------
-set autochdir
+"set autochdir
 
 " -----------------------------------------------------------------------------
 " Turn on syntax highlighting.
