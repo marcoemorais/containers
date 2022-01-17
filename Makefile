@@ -4,6 +4,7 @@ DIRS := \
 	clang10 \
 	clang6 \
 	clang8 \
+	clion-cpp \
 	eigen \
 	flask \
 	gcc10 \

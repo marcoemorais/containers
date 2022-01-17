@@ -24,24 +24,23 @@ RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt
     tar \
     tree
 
+# Install google developer tools: gflags, gtest, google-benchmark.
+RUN apt-get install -y \
+    libgflags-dev \
+    libgtest-dev \
+    libbenchmark-dev
+
+# Install catch.
+RUN apt-get install -y \
+    catch
+
+# Install doctest.
+RUN apt-get install -y \
+    doctest-dev
+
 # Use the gcc toolchain by setting CC and CXX environment variables.
 ENV CC=/usr/bin/gcc
 ENV CXX=/usr/bin/g++
-
-# Installation prefix for third party libraries.
-ARG PREFIX_DIRECTORY=/usr/local
-
-# Unit test.
-ARG DOCTEST_TAG=2.4.6
-RUN git clone -q https://github.com/onqtam/doctest.git /doctest-${DOCTEST_TAG} --branch ${DOCTEST_TAG} \
-    && mkdir -p /doctest-${DOCTEST_TAG}/.build \
-    && cd /doctest-${DOCTEST_TAG}/.build \
-    && cmake \
-        -DCMAKE_BUILD_TYPE=RELEASE \
-        -DCMAKE_INSTALL_PREFIX=${PREFIX_DIRECTORY} \
-        .. \
-    && make install \
-    && rm -rf /doctest-${DOCTEST_TAG}
 
 # By convention, all development in /src.
 WORKDIR /src
