@@ -26,6 +26,10 @@ RUN apt-get install -y \
 RUN apt-get install -y \
     catch
 
+# Install doctest.
+RUN apt-get install -y \
+    doctest-dev
+
 # Explode manpages.
 RUN yes | unminimize \
     && apt-get install -y man-db
@@ -36,18 +40,6 @@ ENV CXX=/usr/bin/g++
 
 # Installation prefix for third party libraries.
 ARG PREFIX_DIRECTORY=/usr/local
-
-# Unit test.
-ARG DOCTEST_TAG=2.4.6
-RUN git clone -q https://github.com/onqtam/doctest.git /doctest-${DOCTEST_TAG} --branch ${DOCTEST_TAG} \
-    && mkdir -p /doctest-${DOCTEST_TAG}/.build \
-    && cd /doctest-${DOCTEST_TAG}/.build \
-    && cmake \
-        -DCMAKE_BUILD_TYPE=RELEASE \
-        -DCMAKE_INSTALL_PREFIX=${PREFIX_DIRECTORY} \
-        .. \
-    && make install \
-    && rm -rf /doctest-${DOCTEST_TAG}
 
 # C++ reference.
 ARG STDMAN_TAG=2021.12.21
