@@ -6,6 +6,7 @@ ARG CLANG_VERSION=10
 
 # Base system including toolchain and dependencies.
 RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+    ccache \
     clang-${CLANG_VERSION} \
     clang-tidy-${CLANG_VERSION} \
     clang-format-${CLANG_VERSION} \
