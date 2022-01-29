@@ -5,13 +5,13 @@ LABEL maintainer="Marco Morais <marcoemorais@yahoo.com>"
 # Base system including toolchain and dependencies.
 RUN apt-get update && apt-get upgrade -y && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     curl \
-    ctags \
     git \
     make \
     man \
     manpages-dev \
     ripgrep \
     tree \
+    universal-ctags \
     vim
 
 # Explode manpages.
@@ -37,6 +37,9 @@ RUN git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp --br
 
 ARG VIM_RIPGREP_TAG=v1.0.3
 RUN git clone https://github.com/jremmen/vim-ripgrep.git ~/.vim/bundle/vim-ripgrep --branch $VIM_RIPGREP_TAG
+
+ARG TAGBAR_TAG=v3.0.0
+RUN git clone https://github.com/preservim/tagbar.git ~/.vim/bundle/tagbar --branch $TAGBAR_TAG
 
 # Copy vimrc into home directory.
 ENV HOME /root
