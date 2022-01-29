@@ -1,5 +1,3 @@
-action?=docker-build
-
 DIRS := \
 	clang10 \
 	clang6 \
@@ -23,7 +21,6 @@ DIRS := \
 all:: $(DIRS)
 
 $(DIRS):
-	# e.g. make action=(-insert-your-action-here-)
-	$(MAKE) -C $@ $(action)
+	$(MAKE) -C $@
 
 include Makefile.defs
