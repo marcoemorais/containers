@@ -41,6 +41,9 @@ RUN git clone https://github.com/jremmen/vim-ripgrep.git ~/.vim/bundle/vim-ripgr
 ARG TAGBAR_TAG=v3.0.0
 RUN git clone https://github.com/preservim/tagbar.git ~/.vim/bundle/tagbar --branch $TAGBAR_TAG
 
+ARG EDITORCONFIG_TAG=v1.1.1
+RUN git clone https://github.com/editorconfig/editorconfig-vim.git ~/.vim/bundle/editorconfig --branch $EDITORCONFIG_TAG
+
 # Copy vimrc into home directory.
 ENV HOME /root
 COPY vimrc $HOME/.vimrc
@@ -49,7 +52,7 @@ COPY vimrc $HOME/.vimrc
 ARG PREFIX_DIRECTORY=/usr/local
 
 # C++ reference.
-ARG STDMAN_TAG=2021.12.21
+ARG STDMAN_TAG=2022.07.30
 RUN git clone -q https://github.com/jeaye/stdman.git /stdman-${STDMAN_TAG} --branch ${STDMAN_TAG} \
     && mkdir -p /stdman-${STDMAN_TAG} \
     && cd /stdman-${STDMAN_TAG} \
